@@ -3,16 +3,12 @@ function solution(D) {
     var map = { 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7 };
     var map = { 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7 };
     var D1 = {};
-    var myDate = {};
-    var finalD1 = {};
     var lastkey;
-    var myDate1 = {};
     var arr = [];
     var mkey = [];
     var dkey = [];
     mkey = Object.keys(map);
     for (var key in D) {
-        myDate[key] = D[key];
         var d = new Date(key);
         var dayName = weekdays[d.getDay()];
         dkey.push(dayName);
@@ -23,7 +19,6 @@ function solution(D) {
             D1[dayName] = D[key];
         }
     }
-    var newArray = [];
     for (var k = 0; k < mkey.length; k++) {
         var match = false;
         for (var l = 0; l < dkey.length; l++) {
@@ -35,7 +30,6 @@ function solution(D) {
         if (!match) {
             var difference = 0;
             for (var key in D1) {
-                myDate1[key] = D1[key];
                 var first = 0;
                 var d1 = new Date(key);
                 var dayName1 = weekdays[d1.getDay()];

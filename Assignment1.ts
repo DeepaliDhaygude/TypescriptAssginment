@@ -1,104 +1,96 @@
 function solution(D)
 {
-var weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-var map ={'Mon' : 1, 'Tue' : 2,'Wed' : 3,'Thu' : 4,'Fri': 5,'Sat' : 6, 'Sun' : 7}; 
-var map ={'Mon' : 1, 'Tue' : 2,'Wed' : 3,'Thu' : 4,'Fri': 5,'Sat' : 6, 'Sun' : 7}; 
-var D1 = {};
-var myDate ={};
-var finalD1 = {};
-var lastkey;
-var myDate1 ={};
-var arr =[];
-var mkey = [];
-var dkey = [];
-mkey = Object.keys(map);
+    var weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var map ={'Mon' : 1, 'Tue' : 2,'Wed' : 3,'Thu' : 4,'Fri': 5,'Sat' : 6, 'Sun' : 7}; 
+    var map ={'Mon' : 1, 'Tue' : 2,'Wed' : 3,'Thu' : 4,'Fri': 5,'Sat' : 6, 'Sun' : 7}; 
+    var D1 = {};
+    var lastkey;
+    var arr =[];
+    var mkey = [];
+    var dkey = [];
+    mkey = Object.keys(map);
 
-for(let key in D)
-{
-    myDate[key] = D[key];
-
-    var d = new Date(key);
-    var dayName = weekdays[d.getDay()];
-        
-        dkey.push(dayName);
-        if(dayName in D1)
-        {
-            D1[dayName] = D1[dayName] + D[key];        
-        }
-        else{
-            D1[dayName] = D[key];
-        }  
-  
-}
-
-var newArray=[];
-for(let k=0; k< mkey.length ;k++)
-{
-    var match = false;
-    for(let l=0; l<dkey.length ; l++)
+    for(let key in D)
     {
-        if ((mkey[k] == dkey[l]))
-        {
-            match = true;
-            break;
-        }
-    }
-    if(!match)
-    {
-
-        var difference=0;
-for(let key in D1)
-{
-    myDate1[key] = D1[key];
-         
-        var first=0;
-        var d1 = new Date(key);
-    
-        var dayName1 = weekdays[d1.getDay()];
-        lastkey=0;
-       
-            for(let j in map)
+        var d = new Date(key);
+        var dayName = weekdays[d.getDay()];
+            
+            dkey.push(dayName);
+            if(dayName in D1)
             {
-                first = D1[j];
-                difference = first - lastkey;
-                
-                arr.push(difference);
-                
-                if(dayName1 == j)
-                {                
-                    continue;             
-                }       
-                else 
-                {                        
-                     D1[j] = lastkey + arr[0];
-                }
-                lastkey = D1[j];
-                
-            }            
-}
+                D1[dayName] = D1[dayName] + D[key];        
+            }
+            else
+            {
+                D1[dayName] = D[key];
+            }  
     }
-}
 
+    for(let k=0; k< mkey.length ;k++)
+    {
+        var match = false;
+        for(let l=0; l<dkey.length ; l++)
+        {
+            if ((mkey[k] == dkey[l]))
+            {
+                match = true;
+                break;
+            }
+        }
+        if(!match)
+        {
 
+            var difference=0;
+            for(let key in D1)
+            {                    
+                    var first=0;
+                    var d1 = new Date(key);
+                
+                    var dayName1 = weekdays[d1.getDay()];
+                    lastkey=0;
+                
+                    for(let j in map)
+                    {
+                        first = D1[j];
+                        difference = first - lastkey;
+                        
+                        arr.push(difference);
+                        
+                        if(dayName1 == j)
+                        {                
+                            continue;             
+                        }       
+                        else 
+                        {                        
+                            D1[j] = lastkey + arr[0];
+                        }
+                        lastkey = D1[j];
+                        
+                    }                   
+            }
+        }
+    }  
 
         
-let tmp = [];
-Object.keys(D1).forEach(function(key) {
-  let value = D1[key];
-  let index = map[key];
-  tmp[index] = {
-    key: key,
-    value: value
-  };
-});
+    let tmp = [];
+    Object.keys(D1).forEach(function(key) {
+    let value = D1[key];
+    let index = map[key];
+    tmp[index] = {
+        key: key,
+        value: value
+    };
+    });
 
-let orderedData = {};
-tmp.forEach(function(obj) {
-  orderedData[obj.key] = obj.value;
-});
+    let orderedData = {};
+    tmp.forEach(function(obj) {
+    orderedData[obj.key] = obj.value;
+    });
 
-console.log(orderedData);
-}
+
+    console.log(orderedData); 
+
+} 
 
 
     console.log('Menu => ');
